@@ -1,0 +1,52 @@
+{
+  "name": "v2.2 - FM Radio RDS",
+  "description": "My FxOS FM Radio RDS buidt with Tako framework",
+  "type": "web",
+  "launch_path": "/article_index.html",
+  "appcache_path": "/offline.appcache",
+  "version" : "1.2",
+  "icons": {
+    "24": "/stylesheets/mine/icono_pua/circular/icon_24.png",
+    "32": "/stylesheets/mine/icono_pua/circular/icon_32.png",
+    "64": "/stylesheets/mine/icono_pua/circular/icon_64.png",
+    "128": "/stylesheets/mine/icono_pua/circular/icon_128.png",
+    "256": "/stylesheets/mine/icono_pua/circular/icon_256.png",
+    "512": "/stylesheets/mine/icono_pua/circular/icon_512.png"
+  },
+  "developer": {
+    "name": "imagonbar",
+    "url": "http://web.imagonbar.com/"
+  },
+  "default_locale":"en-US",
+  "locales": {
+    "en-US":{"name":"v2.2 - FM Radio RDS","description":"My FxOS FM Radio RDS built with TakoJS framework"},
+    "fr":{"name":"v2.2 - FM Radio RDS","description":"Mon FxOS FM Radio RDS construit avec cadre TakoJS"},
+    "es":{"name":"v2.2 - FM Radio RDS","description":"FxOS FM Radio RDS construida con el framework Tako"},
+    "eu":{"name":"v2.2 - FM irratia RDS","description":"FxOS FM Radio RDS Tako framework-ekin eraikina"}
+  },
+  "permissions": {
+    "geolocation": {
+      "description": "Necesario para indicar la posición actual."
+    },
+    "storage": {
+      "description": "Necesario para almacenar rutas -- IndexedDB access to store library and do not rescan whole library on each start"
+    },
+    "desktop-notification": {
+      "description": "Necesario para crear notificaciones"
+    },
+    "contacts": {
+      "description" : "Ver los contactos",
+      "access" : "readwrite"
+    },
+    "systemXHR": {
+      "description": "Required to load remote content"
+    },
+    "fmradio": {
+      "description": "Necesario para habilitar la Radio FM."
+    },
+    "speaker-control":{
+      "description": "Necesario para habilitar el altavoz en la Radio FM."
+    }
+  },  
+  "orientation":"portrait" 
+}

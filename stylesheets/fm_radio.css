@@ -1,0 +1,122 @@
+html, body {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #FFF;
+  /*font-size: 10px;*/
+}
+
+a {
+  outline: 0 none;
+  text-decoration: none;
+  color: #FFF;
+}
+
+a:active {
+  color: #000;
+  background-color: #00ABCD;
+}
+
+.hidden-block {
+  visibility: hidden;
+}
+
+
+/***** styles for status bars *****/
+#action-bar {
+  bottom: 0;
+  border-top: .1rem solid #3A3E46;
+  box-shadow: 0 0 .2rem #111;
+  height: 9rem;
+  overflow: hidden;
+}
+
+/* Styles for action bar */
+/* FIX: it doesn't hide itself */
+#action-bar[hidden] {
+  display: none;
+}
+
+#action-bar > div {
+  text-align: center;
+  padding: 1rem 0 0;
+  /*width: 33.333%; cuando solo hay tres elementos*/
+  float: left;
+}
+
+#action-bar > div:first-child {
+  text-align: right;
+}
+
+#action-bar > div:last-child {
+  text-align: left;
+}
+
+#action-bar a {
+  display: inline-block;
+  border: none;
+  font-size: 2.5rem;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: 0 .1rem .1rem #A8A8A8 inset, 0 .2rem 0 #1e2226;
+}
+
+#action-bar a:active {
+  color: #FFF;
+  background-color: #00ABCD;
+  box-shadow: 0 .1rem .1rem #3F6978 inset, 0 .2rem 0 #1e2226;
+}
+
+#power-switch, #power-switch span {
+  background-image: url(images/play.png), url(images/reflection-72.png);
+  background-repeat: no-repeat, no-repeat;
+  background-color: transparent;
+  background-position: center center, 0 0;
+  background-size: 7.2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+#power-switch:active {
+  background-image: url(images/play.png);
+}
+
+#power-switch[data-enabled="true"] {
+  background-image: url(images/stop.png), url(images/reflection-72.png);
+}
+
+#power-switch[data-enabled="true"]:active {
+  background-image: url(images/stop.png);
+}
+
+#power-switch span {
+  /*background-image: url(images/spinner-FMRadio.png);*/
+  background-image: url(images/pua_bn.png);
+  background-size: 6.6rem;
+  display: none;
+  height: 6.6rem;
+  left: 0.2rem;
+  position: absolute;
+  top: 0.2rem;
+  width: 6.6rem;
+}
+
+#power-switch[data-enabling="true"] span,
+#power-switch[data-seeking="true"] span {
+  animation: 0.9s spinner-animation infinite steps(30);
+  display: block;
+}
+
+@keyframes spinner-animation {
+  from {
+    transform: rotate(1deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

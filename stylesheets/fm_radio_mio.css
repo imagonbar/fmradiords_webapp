@@ -1,0 +1,151 @@
+
+/***** boton bucle *****/
+#bucle-switch {
+  top: 0;
+  left: 0;
+  background: url("images/bucle.png") no-repeat center center / 4rem;
+  background-color: white;
+}
+
+#bucle-switch:focus {
+  border-color: #888;
+}
+
+#bucle-switch:active,
+#bucle-switch[data-bucle-on="true"]:active {
+  background: #00ABCD url("images/bucle.png") no-repeat center center / 4rem;
+}
+
+#bucle-switch[data-bucle-on="true"] {
+  background: url("images/bucle.png") no-repeat center center / 4rem;
+}
+/***** end boton bucle *****/
+
+/***** listado datos almacenados *****/
+.listado_items{
+	background-color: #BBDFDF;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	margin-top: 10px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	font-size: 3rem;
+	color: #1164A2;
+}
+
+.btn_list_item{
+	width: 45%;
+	margin: 5px auto;
+	/*position: relative;
+	clear: 	both;*/
+	color: white;
+	background-color: #4F46E8;
+	font-size: 1em;
+	border-width: 3px;
+	border-color: #6B2C6B;
+	border-style: double;
+	margin: 5px;
+	display: inline;/*none*/
+}
+
+
+
+/***** botones sintonizar directamente un canal fijo *****/
+/* Una */
+#try_one-switch {
+  top: 0;
+  left: 5rem;
+  background: url("images/speaker-off.png") no-repeat center center / 4rem;
+}
+
+#try_one-switch:focus {
+  border-color: #888;
+}
+
+#try_one-switch:active,
+#try_one-switch[data-try_one-on="true"]:active {
+  background: #00ABCD url("images/speaker-pressed.png") no-repeat center center / 4rem;
+}
+
+#try_one-switch[data-try_one-on="true"] {
+  background: url("images/speaker-on.png") no-repeat center center / 4rem;
+}
+
+
+/* Otra */
+#try_two-switch {
+  top: 0;
+  left: 8rem;
+  background: url("images/speaker-off.png") no-repeat center center / 4rem;
+}
+
+#try_two-switch:focus {
+  border-color: #888;
+}
+
+#try_two-switch:active,
+#try_two-switch[data-try_two-on="true"]:active {
+  background: #00ABCD url("images/speaker-pressed.png") no-repeat center center / 4rem;
+}
+
+#try_two-switch[data-try_two-on="true"] {
+  background: url("images/speaker-on.png") no-repeat center center / 4rem;
+}
+/***** end botones sintonizar directamente un canal fijo *****/
+
+
+/*** Usando el z-index ***/
+#poner_capa_superior{
+  z-index : 2;
+}
+/*** Fin Usando el z-index ***/
+
+
+/*** Para ocultar botones del action bar ***/
+.boton_action_bar_oculto{
+  /*visibility: hidden; */   /*oculto pero respetando el hueco; */
+  display: none; /*oculto como si no estuviera en la app; */
+}
+#action-bar > div {
+  /* para cuando hay cuatro elementos*/
+  width: 15%;
+
+  /* para cuando hay seis elementos*/
+  /*width: 16.666%;*/
+}
+/*** Para ocultar botones del action bar ***/
+
+
+/***** end botones sintonizar directamente un canal fijo *****/
+#go_left {
+  position: absolute;
+  left: 1rem;
+  top: 23rem;
+  height: 6rem;
+  font-size: 12rem;
+  background: url("images/left2.png") no-repeat center center / 8rem;
+  background-color: white;
+  border: 1px solid white;
+  opacity: 0.5;
+  padding-bottom: 0px;
+  border-bottom-width: 6px;
+  border-left-width: 4px;
+}
+
+#go_right {
+  position: absolute;
+  right: 1rem;
+  top: 23rem;
+  height: 6rem;
+  font-size: 12rem;
+  font-size: 12rem;
+  background: url("images/right2.png") no-repeat center center / 8rem;
+  background-color: white;
+  border: 1px solid white;
+  opacity: 0.5;
+  padding-bottom: 0px;
+  border-bottom-width: 6px;
+  border-right-width: 4px;
+}

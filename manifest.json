@@ -1,0 +1,17 @@
+{
+  "name": "FM Radio RDS",
+  "short_name": "FM Radio RDS",
+  "icons": [
+    {
+      "src": "/stylesheets/mine/icono_pua/circular/icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "portrait",
+  "display": "standalone",
+  "theme_color": "#E3E0E0",
+  "background_color": "#E3E0E0",
+  "start_url" : "article_index.html"
+  //"start_url" : "index.html?launcher=true"
+}

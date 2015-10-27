@@ -1,0 +1,1566 @@
+<!doctype html>
+<html>
+<head>
+	<!--<base target="_blank"> url="especifica la url base para todos los componentes de la web" -->
+	<meta http-equiv="Content-Type" content="text/html;" charset="utf-8" />
+	<meta charset="UTF-8">
+	<title>FM Radio RDS</title>
+	<meta name="description" content="FM Radio RDS app/webapp for FirefoxOS mobile devices">
+	<meta name="author" content="Imanol Gonzalez - @imagonbar">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="cleartype" content="on">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="HandheldFriendly" content="True">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<meta http-equiv="x-ua-compatible" content="IE=edge" />
+
+	<link rel="stylesheet" href="./stylesheets/tako.css">
+	<link rel="stylesheet" href="./stylesheets/tako.theme.css">
+	<link rel="stylesheet" href="./stylesheets/tako.android.css">
+	<link rel="stylesheet" href="./stylesheets/tako.ios.css">
+	<link rel="stylesheet" href="./stylesheets/tako.wp.css">
+	<link rel="stylesheet" href="./stylesheets/tako.firefoxos.css">
+
+	<link rel="stylesheet" href="./stylesheets/mine/gaia-icons.css">
+	<link rel="stylesheet" href="./stylesheets/mine/mine_styles.css">
+
+	<link rel="stylesheet" href="./stylesheets/fm_radio.css" type="text/css">
+	<link rel="stylesheet" href="./stylesheets/fm_radio_mio.css" type="text/css"> 
+
+
+	<link rel="icon" href="./stylesheets/mine/favicon/favicon.png" />
+	<link rel="prefetch" type="application/l10n" href="./data/locales.ini" />
+
+	<!--Usamos la linea de abajo para ver registrar las incidencias con el shake-->
+	<script type="text/javascript" src="./js/shake.js"></script>
+
+	<!--Usamos la linea de abajo para ver el mapa-->
+	<!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />-->
+	<link rel="stylesheet" href="./stylesheets/leaflet_maps/leaflet.css" />
+	
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-68576685-2', 'auto');
+      ga('send', 'pageview');
+      ga('set', '&uid', 'UA-68576685-2'); 
+
+    </script>
+    <!-- //Google Analytics -->
+    
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@fmradiords">
+    <meta name="twitter:creator" content="@imagonbar">
+    <meta name="twitter:title" content="FM Radio RDS - App Firefox OS y WebApp multiplataforma">
+    <meta name="twitter:description" content="Gestor de Radio FM 2.0 que, según tu geoposición, te indicará las emisoras disponibles. Si conoces alguna nueva no introducida en el sistema, añádela">
+    <!--<meta name="twitter:image" content="http://t.co/J8yvCDiCOE">-->
+    <meta name="twitter:image" content="http://www.fmradiords.com/recursos/imagenes/fmradiords/icono_grande.png">
+	<!-- //TWITTER -->
+
+    <!-- Webapp -->
+    <link rel="manifest" href="/manifest.json">
+    <!-- //Webapp -->
+
+	<!-- APPCACHE -->
+	<html manifest="offline.appcache">
+	<!-- //APPCACHE -->
+
+</head>
+
+<body class="noflat">
+	<!--<aside>-->
+	<aside class="full">
+		<header>
+			<h1 data-l10n-id="id_fmradiords"></h1>
+			<!--<img class="no_border_no_background" src="./stylesheets/mine/icono_pua/icon_64.png" alt="" />-->
+		</header>
+		<ul>
+			<!-- NOTLOGGED -->
+				<!-- NOTLOGGED INDEX -->
+				<li data-section="section_notlogged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_index" class="icon play"></li>
+				<li data-section="section_comments" data-l10n-id="id_aside_comentarios" data-visible="section_index" class="icon list-big"></li>
+				<li data-section="section_info" data-l10n-id="id_aside_info_app" data-visible="section_index" class="icon info"></li>
+				<li data-section="section_contact" data-l10n-id="id_aside_contact" data-visible="section_index" class="icon share"></li>
+				<li data-section="section_index" data-l10n-id="id_aside_inicio_sesion" data-visible="section_index" class="icon user blue"></li>
+
+				<!-- NOTLOGGED RADIO UI -->
+				<li data-section="section_notlogged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_notlogged_radio_ui" class="icon play"></li>
+				<li data-section="section_comments" data-l10n-id="id_aside_comentarios" data-visible="section_notlogged_radio_ui" class="icon list-big"></li>
+				<li data-section="section_info" data-l10n-id="id_aside_info_app" data-visible="section_notlogged_radio_ui" class="icon info"></li>
+				<li data-section="section_contact" data-l10n-id="id_aside_contact" data-visible="section_notlogged_radio_ui" class="icon share"></li>
+				<li data-section="section_index" data-l10n-id="id_aside_inicio_sesion" data-visible="section_notlogged_radio_ui" class="icon user blue"></li>
+					
+				<!-- NOTLOGGED IDENTIFY -->
+				<li data-section="section_notlogged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_index_identify" class="icon play"></li>
+				<li data-section="section_comments" data-l10n-id="id_aside_comentarios" data-visible="section_index_identify" class="icon list-big"></li>
+				<li data-section="section_info" data-l10n-id="id_aside_info_app" data-visible="section_index_identify" class="icon info"></li>
+				<li data-section="section_contact" data-l10n-id="id_aside_contact" data-visible="section_index_identify" class="icon share"></li>
+				<li data-section="section_index" data-l10n-id="id_aside_inicio_sesion" data-visible="section_index_identify" class="icon user blue"></li>
+
+				<!-- NOTLOGGED REGISTER -->
+				<li data-section="section_notlogged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_index_register" class="icon play"></li>
+				<li data-section="section_comments" data-l10n-id="id_aside_comentarios" data-visible="section_index_register" class="icon list-big"></li>
+				<li data-section="section_info" data-l10n-id="id_aside_info_app" data-visible="section_index_register" class="icon info"></li>
+				<li data-section="section_contact" data-l10n-id="id_aside_contact" data-visible="section_index_register" class="icon share"></li>
+				<li data-section="section_index" data-l10n-id="id_aside_inicio_sesion" data-visible="section_index_register" class="icon user blue"></li>
+				
+				<!-- NOTLOGGED RDS -->
+				<li data-section="section_notlogged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_notlogged_rds" class="icon play"></li>
+				<li data-section="section_comments" data-l10n-id="id_aside_comentarios" data-visible="section_notlogged_rds" class="icon list-big"></li>
+				<li data-section="section_info" data-l10n-id="id_aside_info_app" data-visible="section_notlogged_rds" class="icon info"></li>
+				<li data-section="section_contact" data-l10n-id="id_aside_contact" data-visible="section_notlogged_rds" class="icon share"></li>
+				<li data-section="section_index" data-l10n-id="id_aside_inicio_sesion" data-visible="section_notlogged_rds" class="icon user blue"></li>
+
+				<!-- NOTLOGGED COMMENTS -->
+				<li data-section="section_notlogged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_comments" class="icon play"></li>
+				<li data-section="section_comments" data-l10n-id="id_aside_comentarios" data-visible="section_comments" class="icon list-big"></li>
+				<li data-section="section_info" data-l10n-id="id_aside_info_app" data-visible="section_comments" class="icon info"></li>
+				<li data-section="section_contact" data-l10n-id="id_aside_contact" data-visible="section_comments" class="icon share"></li>
+				<li data-section="section_index" data-l10n-id="id_aside_inicio_sesion" data-visible="section_comments" class="icon user blue"></li>
+
+				<!-- NOTLOGGED INFO APP -->
+				<li data-section="section_notlogged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_info" class="icon play"></li>
+				<li data-section="section_comments" data-l10n-id="id_aside_comentarios" data-visible="section_info" class="icon list-big"></li>
+				<li data-section="section_info" data-l10n-id="id_aside_info_app" data-visible="section_info" class="icon info"></li>
+				<li data-section="section_contact" data-l10n-id="id_aside_contact" data-visible="section_info" class="icon share"></li>
+				<li data-section="section_index" data-l10n-id="id_aside_inicio_sesion" data-visible="section_info" class="icon user blue"></li>
+
+				<!-- NOTLOGGED CONTACT -->
+				<li data-section="section_notlogged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_contact" class="icon play"></li>
+				<li data-section="section_comments" data-l10n-id="id_aside_comentarios" data-visible="section_contact" class="icon list-big"></li>
+				<li data-section="section_info" data-l10n-id="id_aside_info_app" data-visible="section_contact" class="icon info"></li>
+				<li data-section="section_contact" data-l10n-id="id_aside_contact" data-visible="section_contact" class="icon share"></li>
+				<li data-section="section_index" data-l10n-id="id_aside_inicio_sesion" data-visible="section_contact" class="icon user blue"></li>
+
+			<!-- LOGGED -->
+				<!-- LOGGED RADIO UI -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_radio_ui" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_radio_ui" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_radio_ui" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_radio_ui" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--
+				<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_radio_ui" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_radio_ui" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_radio_ui" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_radio_ui" class="icon cog"></li>
+
+				<!-- LOGGED PROFILE PROFILE -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_profile" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_profile" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_profile" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_profile" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_profile" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_profile" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_profile" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_profile" class="icon cog"></li>
+				
+				<!-- LOGGED PROFILE LIST FAVS -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_profile_listado_favoritos" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_profile_listado_favoritos" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_profile_listado_favoritos" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_profile_listado_favoritos" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_profile_listado_favoritos" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_profile_listado_favoritos" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_profile_listado_favoritos" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_profile_listado_favoritos" class="icon cog"></li>
+
+				<!-- LOGGED PROFILE LIST PUNTUADOS -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_profile_listado_puntuados" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_profile_listado_puntuados" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_profile_listado_puntuados" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_profile_listado_puntuados" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_profile_listado_puntuados" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_profile_listado_puntuados" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_profile_listado_puntuados" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_profile_listado_puntuados" class="icon cog"></li>
+
+				<!-- LOGGED PROFILE LIST ANIADIDOS -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_profile_listado_aniadidos" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_profile_listado_aniadidos" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_profile_listado_aniadidos" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_profile_listado_aniadidos" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_profile_listado_aniadidos" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_profile_listado_aniadidos" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_profile_listado_aniadidos" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_profile_listado_aniadidos" class="icon cog"></li>
+
+				<!-- LOGGED LIST COMMENTS -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_profile_listado_comentarios" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_profile_listado_comentarios" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_profile_listado_comentarios" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_profile_listado_comentarios" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_profile_listado_comentarios" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_profile_listado_comentarios" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_profile_listado_comentarios" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_profile_listado_comentarios" class="icon cog"></li>
+
+				<!-- LOGGED LIST COMMENTS -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_comments" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_comments" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_comments" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_comments" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_comments" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_comments" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_comments" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_comments" class="icon cog"></li>
+				
+
+				<!-- LOGGED ANIADIR EMISION -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_aniadir_emision" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_aniadir_emision" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_aniadir_emision" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_aniadir_emision" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_aniadir_emision" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_aniadir_emision" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_aniadir_emision" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_aniadir_emision" class="icon cog"></li>
+				
+				<!-- LOGGED ANIADIR EMISORA -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_aniadir_emisora_nueva" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_aniadir_emisora_nueva" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_aniadir_emisora_nueva" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_aniadir_emisora_nueva" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_aniadir_emisora_nueva" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_aniadir_emisora_nueva" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_aniadir_emisora_nueva" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_aniadir_emisora_nueva" class="icon cog"></li>
+
+				<!-- LOGGED RDS -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_rds" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_rds" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_rds" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_rds" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_rds" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_rds" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_rds" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_rds" class="icon cog"></li>
+
+				<!-- LOGGED SCAN -->
+				<!--<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_escanear_emisoras" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_escanear_emisoras" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_escanear_emisoras" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_escanear_emisoras" class="icon location big"></li>
+				<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_escanear_emisoras" class="icon rss"></li>
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_escanear_emisoras" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_escanear_emisoras" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_escanear_emisoras" class="icon cog"></li>-->
+
+				<!-- LOGGED INFO EMISORA -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_info_emisora" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_info_emisora" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_info_emisora" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_info_emisora" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_info_emisora" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_info_emisora" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_info_emisora" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_info_emisora" class="icon cog"></li>
+
+
+				<!-- LOGGED POSITION -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_position" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_position" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_position" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_position" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_position" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_position" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_position" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_position" class="icon cog"></li>
+
+
+				<!-- LOGGED SETTINGS -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_settings" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_settings" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_settings" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_settings" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_settings" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_settings" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_settings" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_settings" class="icon cog"></li>
+
+				<!-- LOGGED SETTINGS CHANGE PASS -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_profile_cambiar_pass" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_profile_cambiar_pass" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_profile_cambiar_pass" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_profile_cambiar_pass" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_profile_cambiar_pass" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_profile_cambiar_pass" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_profile_cambiar_pass" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_profile_cambiar_pass" class="icon cog"></li>
+
+				<!-- LOGGED SETTINGS DELETE USER -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_logged_profile_eliminar_usuario" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_logged_profile_eliminar_usuario" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_logged_profile_eliminar_usuario" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_logged_profile_eliminar_usuario" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_logged_profile_eliminar_usuario" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_logged_profile_eliminar_usuario" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_logged_profile_eliminar_usuario" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_logged_profile_eliminar_usuario" class="icon cog"></li>
+
+
+				<!-- LOGGED INFO APP -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_info_logged" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_info_logged" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_info_logged" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_info_logged" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_info_logged" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_info_logged" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_info_logged" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_info_logged" class="icon cog"></li>
+
+				<!-- LOGGED CONTACT -->
+				<li data-section="section_logged_radio_ui" data-l10n-id="id_aside_radio_ui" data-visible="section_contact_logged" class="icon play"></li>
+				<li data-section="section_logged_profile" data-l10n-id="id_aside_perfil" data-visible="section_contact_logged" class="icon user"></li>
+				<li data-section="section_logged_profile_listado_comentarios" data-l10n-id="id_aside_comentarios" data-visible="section_contact_logged" class="icon list-big"></li>
+				<li data-section="section_logged_position" data-l10n-id="id_aside_posicion" data-visible="section_contact_logged" class="icon location big"></li>
+				<!-- versWEB -->
+				<!--<li data-section="section_logged_escanear_emisoras" data-l10n-id="id_aside_escanear" data-visible="section_contact_logged" class="icon rss"></li>-->
+				<li data-section="section_info_logged" data-l10n-id="id_aside_info_app" data-visible="section_contact_logged" class="icon info"></li>
+				<li data-section="section_contact_logged" data-l10n-id="id_aside_contact" data-visible="section_contact_logged" class="icon share"></li>
+				<li data-section="section_logged_settings" data-l10n-id="id_aside_ajustes" data-visible="section_contact_logged" class="icon cog"></li>
+
+		</ul>
+	</aside>
+	
+	<article id="article_index" data-animation="slide">
+		<header>
+			<nav class="left">
+				<!-- versWEB -->
+				<!--<button class="icon menu" data-action="aside" data-visible="section_index"></button>-->
+				<button class="icon menu" data-action="aside" data-visible="section_notlogged_radio_ui"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_notlogged_rds"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_info"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_contact"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_comments"></button>
+
+				<button class="icon menu" data-action="aside" data-visible="section_index_identify"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_index_register"></button>
+			</nav>
+
+			<h1 data-l10n-id="id_fmradiords" data-visible="section_index">FM Radio RDS</h1>
+			<h1 data-l10n-id="id_identify_titulo" data-visible="section_index_identify">Identificación</h1>
+	        <h1 data-l10n-id="id_register_titulo" data-visible="section_index_register">Registro</h1>
+	        <h1 data-l10n-id="id_comments" data-visible="section_comments">Comentarios</h1>
+	        <h1 data-l10n-id="id_article_info_titulo" data-visible="section_info">Información</h1>
+	        <h1 data-l10n-id="id_article_contacto_titulo" data-visible="section_contact">Contacto</h1>
+            <h1 data-l10n-id="id_fmradiords" data-visible="section_notlogged_radio_ui">FM Radio RDS</h1>
+			<h1 data-l10n-id="id_article_notlogged_rds_text1" data-visible="section_notlogged_rds">RDS</h1>
+
+			<nav class="right" >
+            	<button id="btn_notlogged_radio_ui_reload" data-visible="section_notlogged_radio_ui" class="icon arrows-cw"></button>
+
+				<!--<button class="icon login" data-section="section_index" data-visible="section_notlogged_radio_ui"></button>-->
+				<button class="icon info-circled" id="id_btn_notlogged_rds_info" data-visible="section_notlogged_rds"></button>
+				<button class="icon play" data-section="section_notlogged_radio_ui" data-visible="section_notlogged_rds" id="btn_notlogged_radio_ui"></button>
+				
+				<button class="icon play" data-section="section_notlogged_radio_ui" data-visible="section_comments"></button>
+				<button class="icon play" data-section="section_notlogged_radio_ui" data-visible="section_info"></button>
+				<button class="icon play" data-section="section_notlogged_radio_ui" data-visible="section_contact"></button>
+			</nav>
+		</header>
+		
+		<footer>
+	        <nav>
+	        	<button id="id_article_info_btn" data-section="section_info" class="icon info" data-visible="section_index"></button>
+	        	<button id="id_btn_comments" data-section="section_comments" class="icon list-big" data-visible="section_index"></button>
+	        	<button data-section="section_index_identify" class="icon user" data-visible="section_index_identify"></button>
+	        	<button data-section="section_index_register" class="icon user" data-visible="section_index_register"></button>
+	        	<button data-section="section_comments" class="icon list-big" data-visible="section_comments"></button>
+	        	<button data-section="section_info" class="icon info" data-visible="section_info"></button>
+	        	<button data-section="section_contact" class="icon share" data-visible="section_contact"></button>
+	            <button id="btn_section_notlogged_rds" data-section="section_notlogged_rds" class="icon shuffle" data-visible="section_notlogged_radio_ui"></button>
+	            <button data-section="section_notlogged_rds" class="icon shuffle" data-visible="section_notlogged_rds"></button>
+	        </nav>
+	    </footer>
+
+		<section id="section_index" class="centered" data-animation="slide">
+			<img class="no_border_no_background" src="./stylesheets/mine/icono_pua/icon_256.png" alt="" /><br>
+			
+			<ul class="ul_centered">
+				<button class="wide_index_ppal green_dark biggest" data-section="section_notlogged_radio_ui" data-l10n-id="id_article_index_btn_notlogged" id="id_notlogged_invitado_radio_ui">Entrar como invitado</button><br/>
+				<button class="wide_index big" data-section="section_index_identify" data-l10n-id="id_btn_identify">Identificarse</button>
+				<button class="wide_index big" data-section="section_index_register" data-l10n-id="id_btn_register">Registrarse</button>
+	        </ul>
+	        
+			<!--<button class="wide_index black" data-section="section_comments" data-l10n-id="id_btn_comments" id="id_btn_comments">Comentarios</button>-->
+			<!--<button class="icon hammer red align-center" id="id_btn_incidencia" data-device="tablet"></button>-->
+			<!--<button class="wide_index" id="id_btn_battery_notify">Battery Notify</button>-->
+		</section>
+		
+		<section id="section_index_identify" class="indented" data-animation="slide">
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_email">Email</li>
+	            <li><input type="email" id="id_article_index_identify_email" class="line"></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_password">Password</li>
+	            <li><input type="password" id="id_article_index_identify_pass" class="line">
+	                <p class="subtitulo_mini_derecha" data-l10n-id="id_subtitulo_minimos_caracteres">*mínimo 6 carácteres</p>
+	            </li>
+	        </ul>
+	        <!--<button class="smallest blue btn_leftered" data-article="article_index_identify_recordar_pass" data-l10n-id="id_password_recordar">No recuerdo el password</button>-->
+	        <button class="wide" data-l10n-id="id_entrar" id="id_article_index_identify_btn_indentify">Entrar</button>
+	        <p><span id="txtBD_activar_usuario_index"></span></p>
+	    </section>
+	    
+	    <section id="section_index_register" class="indented" data-animation="slide">
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_nombre_usuario">Nombre Usuario</li>
+	            <li>
+	                <input type="text" id="id_article_index_register_nombre_usuario" class="line">
+	                <p class="subtitulo_mini_derecha" data-l10n-id="id_subtitulo_minimos_caracteres" maxlength="20">*mínimo 6 carácteres</p>
+	            </li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_email">Email</li>
+	            <li><input type="email" id="id_article_index_register_email" class="line"></li>
+	        </ul>
+	        <ul>
+	            <!-- opcion 1 FIREFOX OS-->
+	            <!--<li class="separator" style="color:black;" data-l10n-id="id_foto" data-os="firefoxos"></li>
+	            <div id="mainnn" data-os="firefoxos">
+	                <div id="image-presenter"  data-os="firefoxos"></div>
+	            </div>
+	            <button id="pick-image_register" data-l10n-id="id_pick-image" data-os="firefoxos" class="wide_index brown">Pick image register</button>-->
+	            
+	            <!-- FUNCIONAN PARA ANDROID Y TABLET Y PC ESTAS DOS SIGUIENTES PARTES DE CODIGO, PERO NOS CENTRAMOS SOLO EN FxOS DE MOMENTO -->
+	            <!-- opcion 2 movil-->
+	            <!--<li class="separator" style="color:black;" data-l10n-id="id_foto" data-os="android">Foto</li>
+	            <li data-os="android">
+	                <input class="input" type="file" accept="image/*" id="foto_upload" name="foto_upload" data-os="android">
+	            </li>-->
+
+	            <!-- opcion 2 pc-tablet-->
+	            <!--<li class="separator" style="color:black;" data-l10n-id="id_foto" data-device="tablet">Foto</li>
+	            <li data-device="tablet">
+	                <input class="input" type="file" accept="image/*" id="foto_upload" name="foto_upload" data-device="tablet">
+	            </li>-->
+	        </ul>
+	        <!--<ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_foto">Foto3</li>
+	            <button class="wide_index" id="pick-image" data-l10n-id="pick-image">Pick image</button>
+	            <div id="image-presenter"></div>
+	        </ul>-->
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_password">Password</li>
+	            <li><input type="password" id="id_article_index_register_pass" class="line">
+	                <p class="subtitulo_mini_derecha" data-l10n-id="id_subtitulo_minimos_caracteres">*mínimo 6 carácteres.</p>
+	            </li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_password_bis">Repetir Password</li>
+	            <li><input type="password" id="id_article_index_register_pass_rep" class="line">
+	                <p class="subtitulo_mini_derecha" data-l10n-id="id_subtitulo_minimos_caracteres">*mínimo 6 carácteres.</p>
+	            </li>
+	        </ul>
+	        <button class="wide" data-l10n-id="id_register_btn_register" id="id_article_index_register_btn_register">Realizar Registro</button>
+	        <p><span id="txtBD_aniadir_usuario_index"></span></p>
+	    </section>
+	    
+	    <section id="section_comments" class="indented" data-animation="cover">
+	        <ul id="txtBD_comentarios"></ul>
+	    </section>
+	    
+	    <section id="section_info" class="indented" data-animation="slide">
+	        <ul>
+	            <h1 class="align-center" data-l10n-id="id_fmradiords">FM Radio RDS</h1>
+	            <p class="align-justify" data-l10n-id="id_article_info_text1">Esta aplicación web es el resultado de un proyecto final para el Grado de Informática de Gestión y Sistemas de la Información. </p>
+	            <p class="align-justify" data-l10n-id="id_article_info_text2">Consiste en un gestor de radio FM avanzado. Gracias a la geolocalización del dispositivo y al sensor de radio FM integrado, ofrecerá a los usuarios la opción de seleccionar la emisora que desea escuchar sin depender de su frecuencia, manteniendo la emisora que esté escuchando según su geoposición.</p>
+	            <p class="align-justify" data-l10n-id="id_article_info_text3">Se trata de una aplicación para el sistema operativo de Mozilla Firefox OS, disponible para el resto de plataformas con sus funciones limitadas.</p>
+	        </ul>
+
+	        <!-- Colaboradores -->
+	        <ul>
+	            <li>
+	                <h3 class="align-center datos_contacto_rrss_titulos" data-l10n-id="id_colaboradores">Colaboradores</h3>
+	            </li>
+	        </ul>
+	        
+	        <!-- Open Street Map-->
+	        <ul>
+	            <li class="map datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_openstreetmap">OpenStreetMap </p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="view_url_openstreetview_firefoxos" data-os="firefoxos" data-l10n-id="id_colaboradores_web">Visitar web</p>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-os="android" data-l10n-id="id_colaboradores_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-browser="firefox" data-l10n-id="id_colaboradores_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-browser="chrome" data-l10n-id="id_colaboradores_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-browser="safari" data-l10n-id="id_colaboradores_web ">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-browser="ie" data-l10n-id="id_colaboradores_web">Visitar web</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- Mozilla Developer Network-->
+	        <ul>
+	            <li class="html5 datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_mdn">Mozilla Developen Networks</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="view_url_mdn_firefoxos" data-os="firefoxos" data-l10n-id="id_mdn_web">Visitar web</p>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-os="android" data-l10n-id="id_mdn_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-browser="firefox" data-l10n-id="id_mdn_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-browser="chrome" data-l10n-id="id_mdn_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-browser="safari" data-l10n-id="id_mdn_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-browser="ie" data-l10n-id="id_mdn_web">Visitar web</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+			<!-- TakoJS-->
+	        <ul>
+	        	<!--<li class="compass datos_contacto_rrss">-->
+	            <li class="datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_takojs">TakoJS</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+                        	<p class="align-center elem_info_sin_margenes" id="view_url_takojs_firefoxos" data-os="firefoxos" data-l10n-id="id_takojs_web">Visitar web	
+		                		<button class="white elem_info_sin_margenes elem_info_sin_margenes_btn">
+		                			<img src="./stylesheets/mine/icons/tako-logo.png" alt="">
+		                		</button>
+	                		</p>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-os="android" data-l10n-id="id_takojs_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-browser="firefox" data-l10n-id="id_takojs_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-browser="chrome" data-l10n-id="id_takojs_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-browser="safari" data-l10n-id="id_takojs_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-browser="ie" data-l10n-id="id_takojs_web">Visitar web
+	                        </a>
+	                    </div>
+                		<!--<img src="./stylesheets/mine/icons/tako-logo.png" alt="">-->
+	                    
+	                </div>
+	            </li>
+	        </ul>
+	    </section>
+
+		<section id="section_contact" class="indented" data-animation="slide">
+	        <!-- Aplicación -->
+	        <ul>
+	            <li>
+	                <h3 class="align-center datos_contacto_rrss_titulos" data-l10n-id="id_article_info_text5">Aplicación: FM Radio RDS App</h3>
+	            </li>
+	        </ul>
+	        <!-- Twitter FMRadioRDS -->
+	        <ul>
+	            <li class="twitter datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_twitter">Twitter</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <!-- Para FxOS Versión app, la de abajo es versión web ¿? <a class="align-center" target="_blank" href="https://twitter.com/fmradiords" data-os="firefoxos" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>-->
+	                        <p class="align-center" id="view_url_twitter_profile_fmradiords_firefoxos" data-os="firefoxos" data-l10n-id="id_fmradiords_twitter"> @fmradiords</p>
+	                        <a class="align-center black" href="https://twitter.com/fmradiords" data-os="android" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/fmradiords" data-browser="firefox" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/fmradiords" data-browser="chrome" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/fmradiords" data-browser="safari" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/fmradiords" data-browser="ie" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- GooglePlus FMRadioRDS -->
+	        <ul>
+	            <li class="googleplus datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column ">
+	                        <p class="align-center" data-l10n-id="id_googleplus">Google+ </p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="view_url_googleplus_profile_fmradiords_firefoxos" data-os="firefoxos" data-l10n-id="id_fmradiords_googleplus">+fmradiords</p>
+	                        <a class="align-center black" href="https://plus.google.com/u/0/117003371651579243396/posts" data-os="android" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/u/0/117003371651579243396/posts" data-browser="firefox" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/u/0/117003371651579243396/posts" data-browser="chrome" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/u/0/117003371651579243396/posts" data-browser="safari" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/u/0/117003371651579243396/posts" data-browser="ie" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- Email to FMRadioRDS -->
+	        <ul>
+	            <li class="email datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column ">
+	                        <p class="align-center" data-l10n-id="id_email">Email</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="write_email_fmradiords_firefoxos" data-os="firefoxos" data-l10n-id="id_fmradiords_email">fmradiords</p>
+	                        <address class="align-center" data-os="android" ><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com">fmradiords</a></address>
+	                        <address class="align-center" data-browser="firefox"><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com"></a></address>
+	                        <address class="align-center" data-browser="chrome" ><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com">fmradiords</a></address>
+	                        <address class="align-center" data-browser="safari" ><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com">fmradiords</a></address>
+	                        <address class="align-center" data-browser="ie" ><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com">fmradiords</a></address>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <br>
+	        <br>
+	        <!-- Desarrollador -->
+	        <ul>
+	            <li>
+	                <h3 class="align-center datos_contacto_rrss_titulos" data-l10n-id="id_article_info_text6">Desarrollador: Imanol Gonbar</h3>
+	            </li>
+	        </ul>
+	        <!-- Twitter imagonbar -->
+	        <ul>
+	            <li class="twitter datos_contacto_rrss">
+	                <div class="line align-center ">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_twitter">Twitter </p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center " id="view_url_twitter_profile_imagonbar_firefoxos" data-os="firefoxos" data-l10n-id="id_imagonbar_twitter"> @imagonbar</p>
+	                        <a class="align-center black" href="https://twitter.com/imagonbar" data-os="android" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/imagonbar" data-browser="firefox" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/imagonbar" data-browser="chrome" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/imagonbar" data-browser="safari" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/imagonbar" data-browser="ie" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- GooglePlus imagonbar -->
+	        <ul>
+	            <li class="googleplus datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_googleplus">Google+ </p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="view_url_googleplus_profile_imagonbar_firefoxos" data-os="firefoxos" data-l10n-id="id_imagonbar_googleplus">+imagonbar</p>
+	                        <a class="align-center black" href="https://plus.google.com/+ImanolGonBar" data-os="android" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/+ImanolGonBar" data-browser="firefox" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/+ImanolGonBar" data-browser="chrome" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/+ImanolGonBar" data-browser="safari" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/+ImanolGonBar" data-browser="ie" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- Email to imagonbar -->
+	        <ul>
+	            <li class="email datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column ">
+	                        <p class="align-center" data-l10n-id="id_email">Email</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="write_email_imagonbar_firefoxos" data-os="firefoxos" data-l10n-id="id_imagonbar_email">imagonbar</p>
+	                        <address class="align-center" data-os="android" ><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+	                        <address class="align-center" data-browser="firefox"><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+	                        <address class="align-center" data-browser="chrome" ><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+	                        <address class="align-center" data-browser="safari"><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+	                        <address class="align-center" data-browser="ie"><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	    </section>
+
+        <section id="section_notlogged_radio_ui" class="indented" data-animation="slide">
+	        <div id="ppal_radio_notlogged" class="info_vista_ppal_noscrollContent_notlogged">
+	            <ul class="ul_centered_sin_margenes">
+	                <h3 class="align-center subtitulo info_vista_ppal" data-l10n-id="id_article_logged_nombre_emisora_seleccionada" id="id_article_notlogged_nombre_emisora_seleccionada"></h3>
+	                <h3 class="align-center subtitulo info_vista_ppal" data-l10n-id="id_article_logged_frecuencia_emisora_seleccionada" id="id_article_notlogged_frecuencia_emisora_seleccionada"></h3>
+	            </ul>
+	        </div>
+	        <div>
+	            <ul class="ul_centered_sin_margen_sup_notlogged">
+	                <button class="normal blue icon pause botones_punt_fav hidden" id="btn_notlogged_btn_pause"></button><!-- versWEB -->
+	                <button class="normal blue icon play botones_punt_fav hidden" id="btn_notlogged_btn_play"></button><!-- versWEB -->
+	            </ul>
+	        </div>
+	        <!--<div id="ppal_listado_emisiones" class="info_vista_ppal_scrollContent_notlogged">--><!-- NOT versWEB -->
+	        <div id="ppal_listado_emisiones" class="info_vista_ppal_scrollContent_notlogged_web"><!-- versWEB -->
+	        <!--<div id="ppal_listado_emisiones" class="info_vista_ppal_scrollContent">-->
+	            <ul id="txtBD_radio_ui_notlogged_json"></ul>
+	        </div>
+	    </section>
+	    
+	    <section id="section_notlogged_rds" class="indented" data-animation="slide">
+	        <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_notlogged_rds_text1">RDS</h1>
+	        <button class="icon info-circled blue btn_fijo_superior_drch" id="id_btn_notlogged_rds_info"></button>-->
+	        <ul id="txtBD_rds_notlogged"></ul>
+	        <ul id="txtBD_rds_notlogged_json"></ul>
+	    </section>
+	</article>
+
+	<article id="article_logged_radio_ui" data-animation="slide" class="">
+	    <header>
+	        <nav class="left">
+
+	            <!-- LOGGED PROFILE MENU BOTTON-->
+				<button class="icon menu" data-action="aside" data-visible="section_logged_radio_ui"></button>
+	            <button class="icon menu" data-action="aside" data-visible="section_logged_profile"></button>
+	            <button class="icon menu" data-action="aside" data-visible="section_logged_profile_listado_favoritos"></button>
+	            <button class="icon menu" data-action="aside" data-visible="section_logged_profile_listado_puntuados"></button>
+	            <button class="icon menu" data-action="aside" data-visible="section_logged_profile_listado_aniadidos"></button>
+	            
+	            <button class="icon menu" data-action="aside" data-visible="section_logged_comments"></button>
+	            <button class="icon menu" data-action="aside" data-visible="section_logged_profile_listado_comentarios"></button>
+
+				<button class="icon menu" data-action="aside" data-visible="section_logged_aniadir_emision"></button>
+	            <button class="icon menu" data-action="aside" data-visible="section_logged_aniadir_emisora_nueva"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_logged_rds"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_logged_escanear_emisoras"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_logged_info_emisora"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_logged_position"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_logged_settings"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_logged_profile_cambiar_pass"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_logged_profile_eliminar_usuario"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_info_logged"></button>
+				<button class="icon menu" data-action="aside" data-visible="section_contact_logged"></button>
+				
+				
+	        </nav>
+	        <nav class="right">
+	            <!-- LOGGED RADIO UI -->
+	            <!--<button class="icon user" data-section="section_logged_profile" data-visible="section_logged_radio_ui" id="id_article_logged_profile_btn"></button>-->
+	            <button id="btn_logged_radio_ui_reload" data-section="section_logged_radio_ui" class="icon arrows-cw" data-visible="section_logged_radio_ui"></button>
+    			
+    			<!-- LOGGED RADIO UI ADD EMISION-->
+				<button id="id_btn_logged_add_broadcast_info" class="icon info-circled" data-visible="section_logged_aniadir_emision"></button>
+				<!-- LOGGED RADIO UI ADD EMISORA-->
+				<button id="id_btn_logged_add_station_info" class="icon info-circled" data-visible="section_logged_aniadir_emisora_nueva"></button>
+    			<!-- LOGGED RADIO UI RDS-->
+				<button id="id_btn_logged_rds_info" class="icon info-circled" data-visible="section_logged_rds"></button>
+    	        <!-- LOGGED RADIO UI SCAN-->
+				<button id="id_btn_logged_scan_info" class="icon info-circled" data-visible="section_logged_escanear_emisoras"></button>
+				<!-- LOGGED RADIO UI SCAN ADD EMISORA-->
+				<button id="id_btn_logged_add_station_info_scan" class="icon info-circled" data-visible="section_logged_scan_aniadir_emisora"></button>
+
+				<!-- LOGGED RADIO UI ADD EMISION-->
+	            <button id="btn_logged_radio_ui_add" data-section="section_logged_radio_ui" class="icon play" data-visible="section_logged_aniadir_emision"><!-- <img src="./stylesheets/mine/icono_pua/icono_blanco_pua.png" alt=""> --></button>
+	            
+	            <!-- LOGGED RADIO UI ADD EMISORA-->
+	            <button data-section="section_logged_aniadir_emision" data-visible="section_logged_aniadir_emisora_nueva" class="icon play" id="id_add_btn"></button>
+	            <!-- LOGGED RADIO UI RDS-->
+	            <button data-section="section_logged_radio_ui" data-visible="section_logged_rds" class="icon play" id="btn_logged_radio_ui_rds"></button>
+	            <!-- LOGGED RADIO UI SCAN-->
+	            <button data-section="section_logged_radio_ui" data-visible="section_logged_escanear_emisoras" class="icon play" id="btn_logged_radio_ui_scan"></button>
+				
+				<!-- LOGGED RADIO UI SCAN ADD EMISORA-->
+				<button class="icon left-open" data-section="section_logged_escanear_emisoras" data-visible="section_logged_scan_aniadir_emisora" id="id_scan_add_btn"></button>
+				
+				<!-- LOGGED RADIO UI INFO-->
+				<button id="btn_logged_radio_ui_info_emisora" data-section="section_logged_radio_ui" class="icon play animated" data-visible="section_logged_info_emisora"></button>
+
+	            <!-- LOGGED PROFILE -->
+	            <!--<button class="icon share" id="btn_logged_profile_share_notification_firefoxos" data-visible="section_logged_profile" data-os="firefoxos"></button>
+	            <button class="icon share" id="btn_logged_profile_share_notification_others" data-visible="section_logged_profile" data-os="android"></button>
+	            <button class="icon share" id="btn_logged_profile_share_notification_others" data-visible="section_logged_profile" data-browser="firefox"></button>
+	            <button class="icon share" id="btn_logged_profile_share_notification_others" data-visible="section_logged_profile" data-browser="chrome"></button>
+	            <button class="icon share" id="btn_logged_profile_share_notification_others" data-visible="section_logged_profile" data-browser="safari"></button>
+	            <button class="icon share" id="btn_logged_profile_share_notification_others" data-visible="section_logged_profile" data-browser="ie"></button>-->
+
+				<button class="icon info-circled" id="btn_logged_profile_listado_comentarios" data-visible="section_logged_profile_listado_comentarios"></button>
+				<button class="icon info-circled" id="btn_logged_profile_listado_favoritos" data-visible="section_logged_profile_listado_favoritos"></button>
+				<button class="icon info-circled" id="btn_logged_profile_listado_puntuados" data-visible="section_logged_profile_listado_puntuados"></button>
+				<button class="icon info-circled" id="btn_logged_profile_listado_aniadidos" data-visible="section_logged_profile_listado_aniadidos"></button>
+	            
+	            <!-- LOGGED PROFILE -->
+	            <button id="id_btn_logged_profile_back" class="icon play" data-section="section_logged_radio_ui" data-visible="section_logged_profile"></button>
+	            <button id="id_btn_logged_profile_back" class="icon play" data-section="section_logged_radio_ui" data-visible="section_logged_profile_listado_comentarios"></button>
+	            <button class="icon play" data-section="section_logged_profile_listado_comentarios" data-visible="section_logged_comments"></button>
+	            <button id="id_btn_logged_profile_back" class="icon play" data-section="section_logged_radio_ui" data-visible="section_logged_profile_listado_favoritos"></button>
+	            <button id="id_btn_logged_profile_back" class="icon play" data-section="section_logged_radio_ui" data-visible="section_logged_profile_listado_puntuados"></button>
+	            <button id="id_btn_logged_profile_back" class="icon play" data-section="section_logged_radio_ui" data-visible="section_logged_profile_listado_aniadidos"></button>
+				
+				<!-- LOGGED POSITION -->
+	            <button id="id_btn_logged_profile_back" class="icon play" data-section="section_logged_radio_ui" data-visible="section_logged_position"></button>
+
+				<!-- LOGGED SETTINGS -->
+	            <button id="id_btn_logged_profile_back" class="icon play" data-section="section_logged_radio_ui" data-visible="section_logged_settings"></button>
+
+	            <!-- LOGGED PROFILE CAMBIAR PASS -->
+	            <button class="icon play" data-section="section_logged_profile" data-visible="section_logged_profile_cambiar_pass"></button>
+	            <!-- LOGGED PROFILE DAR BAJA -->
+	            <button class="icon play" data-section="section_logged_profile" data-visible="section_logged_profile_eliminar_usuario"></button>
+
+				<!-- LOGGED INFO APP -->
+				<button class="icon play" data-section="section_logged_radio_ui" data-visible="section_info_logged"></button>
+
+				<!-- LOGGED CONTACT -->
+				<button class="icon play" data-section="section_logged_radio_ui" data-visible="section_contact_logged"></button>
+	        </nav>
+	        
+	        <!-- LOGGED RADIO UI -->
+	        <h1 data-l10n-id="id_fmradiords" data-visible="section_logged_radio_ui">FM Radio RDS</h1>
+            <!-- LOGGED RADIO UI ADD EMISION-->
+	        <h1 data-l10n-id="id_article_logged_aniadir_emision_titulo" data-visible="section_logged_aniadir_emision">Añadir emisión</h1>
+            <!-- LOGGED RADIO UI ADD EMISORA-->
+	        <h1 data-l10n-id="id_article_logged_aniadir_emisora_nueva_nombre_titulo" data-visible="section_logged_aniadir_emisora_nueva">Añadir emisora</h1>
+            <!-- LOGGED RADIO UI RDS-->
+	        <h1 data-l10n-id="id_article_logged_rds_titulo" data-visible="section_logged_rds">RDS</h1>
+	        <!-- LOGGED RADIO UI SCAN-->
+	        <h1 data-l10n-id="id_article_logged_escanear_emisoras_titulo" data-visible="section_logged_escanear_emisoras">Escanear emisoras</h1>
+	        <!-- LOGGED RADIO UI SCAN ADD EMISORA-->
+			<h1 data-l10n-id="id_article_logged_aniadir_emision_titulo" data-visible="section_logged_scan_aniadir_emisora">Añadir emisión</h1>
+	        <!-- LOGGED RADIO UI INFO-->
+	        <h1 data-l10n-id="id_article_logged_info_emisora_titulo" data-visible="section_logged_info_emisora">Info Emisora Completa</h1>
+
+	        <!-- LOGGED PROFILE -->
+	        <h1 data-l10n-id="id_article_logged_profile_titulo" data-visible="section_logged_profile">Perfil</h1>
+	        <h1 data-l10n-id="id_article_logged_profile_listado_favoritos_titulo" data-visible="section_logged_profile_listado_favoritos">Favoritos</h1>
+	        <h1 data-l10n-id="id_article_logged_profile_listado_puntuados_titulo" data-visible="section_logged_profile_listado_puntuados">Puntuados</h1>
+	        <h1 data-l10n-id="id_article_logged_profile_listado_aniadidos_titulo" data-visible="section_logged_profile_listado_aniadidos">Añadidos</h1>
+	        
+	        <!-- LOGGED COMMENTS -->
+	        <h1 data-l10n-id="id_comments" data-visible="section_logged_profile_listado_comentarios">Comentarios</h1>
+	        <h1 data-l10n-id="id_near_comments" data-visible="section_logged_comments">Comentarios cercanos</h1>
+
+			<!-- LOGGED SETTINGS -->
+			<h1 data-l10n-id="id_position" data-visible="section_logged_position">Posicion</h1>
+
+			<!-- LOGGED SETTINGS -->
+			<h1 data-l10n-id="id_settings" data-visible="section_logged_settings">Ajustes</h1>
+			
+	        <!-- LOGGED PROFILE CAMBIAR PASS -->
+	        <h1 data-l10n-id="id_cambiar_password" data-visible="section_logged_profile_cambiar_pass">Cambiar Password</h1>
+
+	        <!-- LOGGED PROFILE DAR BAJA USUARIO -->
+	        <h1 data-l10n-id="id_eliminar_usuario" data-visible="section_logged_profile_eliminar_usuario">Eliminar usuario</h1>
+
+			<!-- LOGGED INFO APP -->
+	        <h1 data-l10n-id="id_article_info_titulo" data-visible="section_info_logged">Información</h1>
+
+	        <!-- LOGGED CONTACT -->
+	        <h1 data-l10n-id="id_article_contacto_titulo" data-visible="section_contact_logged">Contacto</h1>
+	    </header>
+
+	    <footer>
+	        <nav>
+	            <!-- LOGGED RADIO UI -->
+	            <!--<button data-section="section_logged_aniadir_emision" class="icon plus"></button>
+	            <button data-section="section_logged_rds" id="btn_section_logged_rds" class="icon shuffle"></button>
+	            <button data-section="section_logged_escanear_emisoras" class="icon rss"></button>-->
+	            <button data-section="section_logged_aniadir_emision" class="icon plus" data-visible="section_logged_radio_ui" id="id_section_logged_aniadir_emision1"></button>
+	            <button data-section="section_logged_aniadir_emision" class="icon plus" data-visible="section_logged_aniadir_emision" id="id_section_logged_aniadir_emision2"></button>
+	            <!--<button data-section="section_logged_aniadir_emision" class="icon plus" data-visible="section_logged_rds" id="id_section_logged_aniadir_emision3"></button>-->
+	            <button data-section="section_logged_aniadir_emision" class="icon plus" data-visible="section_logged_escanear_emisoras" id="id_section_logged_aniadir_emision4"></button>
+	            <button data-section="section_logged_aniadir_emision" class="icon plus" data-visible="section_logged_aniadir_emisora_nueva" id="id_section_logged_aniadir_emision5"></button>
+	            
+	            <button data-section="section_logged_rds" id="btn_section_logged_rds" class="icon shuffle" data-visible="section_logged_radio_ui" id="id_section_logged_rds1"></button>
+	            <!--<button data-section="section_logged_rds" id="btn_section_logged_rds" class="icon shuffle" data-visible="section_logged_aniadir_emision" id="id_section_logged_rds2"></button>-->
+	            <button data-section="section_logged_rds" id="btn_section_logged_rds" class="icon shuffle" data-visible="section_logged_rds" id="id_section_logged_rds3"></button>
+	            <!--<button data-section="section_logged_rds" id="btn_section_logged_rds" class="icon shuffle" data-visible="section_logged_escanear_emisoras" id="id_section_logged_rds4"></button>-->
+	            <!--<button data-section="section_logged_rds" id="btn_section_logged_rds" class="icon shuffle" data-visible="section_logged_aniadir_emisora_nueva"></button>-->
+
+	            <!--<button data-section="section_logged_escanear_emisoras" class="icon rss" data-visible="section_logged_radio_ui" id="id_section_logged_escanear_emisoras1"></button>
+	            <button data-section="section_logged_escanear_emisoras" class="icon rss" data-visible="section_logged_aniadir_emision" id="id_section_logged_escanear_emisoras2"></button>
+	            <button data-section="section_logged_escanear_emisoras" class="icon rss" data-visible="section_logged_rds" id="id_section_logged_escanear_emisoras3"></button>
+	            <button data-section="section_logged_escanear_emisoras" class="icon rss" data-visible="section_logged_escanear_emisoras" id="id_section_logged_escanear_emisoras4"></button>-->
+	            <!--<button data-section="section_logged_escanear_emisoras" class="icon rss" data-visible="section_logged_aniadir_emisora_nueva"></button>-->
+	            <button data-section="section_logged_escanear_emisoras" class="icon rss" data-visible="section_logged_scan_aniadir_emisora"></button>
+	            
+	            <!-- LOGGED INFO RADIO -->
+	            <button id="id_logged_info_emisora" class="icon calendar" data-visible="section_logged_info_emisora"></button>
+	            
+	            <!-- LOGGED PROFILE -->
+	            <button data-section="section_logged_profile" class="icon user" data-visible="section_logged_profile"></button>
+	            <button data-section="section_logged_profile_listado_favoritos" id="id_logged_profile_list_favoritos" class="icon star" data-visible="section_logged_profile"></button>
+	            <button data-section="section_logged_profile_listado_puntuados" id="id_logged_profile_list_puntuados" class="icon edit" data-visible="section_logged_profile"></button>
+	            <button data-section="section_logged_profile_listado_aniadidos" id="id_logged_profile_list_aniadidos" class="icon docs" data-visible="section_logged_profile"></button>
+	            
+				<!-- LOGGED COMMENTS -->
+	            <button data-section="section_logged_profile_listado_comentarios" id="id_logged_profile_list_comentarios" class="icon pencil" data-visible="section_logged_comments"></button>
+	            <button data-section="section_logged_comments" id="id_logged_profile_list_comentarios" class="icon list-big" data-visible="section_logged_comments"></button>
+
+	            <button data-section="section_logged_profile_listado_comentarios" id="id_logged_profile_list_comentarios" class="icon pencil" data-visible="section_logged_profile_listado_comentarios"></button>
+	            <button data-section="section_logged_comments" id="id_logged_profile_list_comentarios" class="icon list-big" data-visible="section_logged_profile_listado_comentarios"></button>
+
+				<!-- LOGGED POSITION -->
+				<button data-section="section_logged_position" class="icon location" data-visible="section_logged_position"></button>
+
+				<!-- LOGGED SETTINGS-->
+				<button data-section="section_logged_settings" class="icon cog" data-visible="section_logged_settings"></button>
+
+	            <!-- LOGGED SETTINGS CAMBIAR PASS-->
+	            <button data-section="section_logged_profile" class="icon user" data-visible="section_logged_profile_cambiar_pass"></button>
+	            
+	            <!-- LOGGED SETTINGS DAR BAJA USUARIO-->
+	            <button data-section="section_logged_profile" class="icon user" data-visible="section_logged_profile_eliminar_usuario"></button>
+
+	            <!-- LOGGED PROFILE COMENTARIOS-->
+	            <!--<button data-section="section_logged_profile" class="icon user" data-visible="section_logged_profile_listado_comentarios"></button>
+	            <button data-section="section_logged_profile_listado_comentarios" id="id_logged_profile_list_comentarios" class="icon list-big" data-visible="section_logged_profile_listado_comentarios"></button> 
+	            <button data-section="section_logged_profile_listado_favoritos" id="id_logged_profile_list_favoritos" class="icon star" data-visible="section_logged_profile_listado_comentarios"></button>
+	            <button data-section="section_logged_profile_listado_puntuados" id="id_logged_profile_list_puntuados" class="icon edit" data-visible="section_logged_profile_listado_comentarios"></button>
+	            <button data-section="section_logged_profile_listado_aniadidos" id="id_logged_profile_list_aniadidos" class="icon docs" data-visible="section_logged_profile_listado_comentarios"></button>-->
+
+	            <!-- LOGGED PROFILE FAVORITOS-->
+	            <button data-section="section_logged_profile" class="icon user" data-visible="section_logged_profile_listado_favoritos"></button>
+	            <!--<button data-section="section_logged_profile_listado_comentarios" id="id_logged_profile_list_comentarios" class="icon list-big" data-visible="section_logged_profile_listado_favoritos"></button> -->
+	            <button data-section="section_logged_profile_listado_favoritos" id="id_logged_profile_list_favoritos" class="icon star" data-visible="section_logged_profile_listado_favoritos"></button>
+	            <button data-section="section_logged_profile_listado_puntuados" id="id_logged_profile_list_puntuados" class="icon edit" data-visible="section_logged_profile_listado_favoritos"></button>
+	            <button data-section="section_logged_profile_listado_aniadidos" id="id_logged_profile_list_aniadidos" class="icon docs" data-visible="section_logged_profile_listado_favoritos"></button>
+
+	            <!-- LOGGED PROFILE PUNTUADOS-->
+	            <button data-section="section_logged_profile" class="icon user" data-visible="section_logged_profile_listado_puntuados"></button>
+	            <!--<button data-section="section_logged_profile_listado_comentarios" id="id_logged_profile_list_comentarios" class="icon list-big" data-visible="section_logged_profile_listado_puntuados"></button> -->
+	            <button data-section="section_logged_profile_listado_favoritos" id="id_logged_profile_list_favoritos" class="icon star" data-visible="section_logged_profile_listado_puntuados"></button>
+	            <button data-section="section_logged_profile_listado_puntuados" id="id_logged_profile_list_puntuados" class="icon edit" data-visible="section_logged_profile_listado_puntuados"></button>
+	            <button data-section="section_logged_profile_listado_aniadidos" id="id_logged_profile_list_aniadidos" class="icon docs" data-visible="section_logged_profile_listado_puntuados"></button>
+
+	            <!-- LOGGED PROFILE ANIADIDOS-->
+	            <button data-section="section_logged_profile" class="icon user" data-visible="section_logged_profile_listado_aniadidos"></button>
+	            <!--<button data-section="section_logged_profile_listado_comentarios" id="id_logged_profile_list_comentarios" class="icon list-big" data-visible="section_logged_profile_listado_aniadidos"></button> -->
+	            <button data-section="section_logged_profile_listado_favoritos" id="id_logged_profile_list_favoritos" class="icon star" data-visible="section_logged_profile_listado_aniadidos"></button>
+	            <button data-section="section_logged_profile_listado_puntuados" id="id_logged_profile_list_puntuados" class="icon edit" data-visible="section_logged_profile_listado_aniadidos"></button>
+	            <button data-section="section_logged_profile_listado_aniadidos" id="id_logged_profile_list_aniadidos" class="icon docs" data-visible="section_logged_profile_listado_aniadidos"></button>
+
+				<!-- LOGGED INFO APP-->
+	            <button data-section="section_info_logged" class="icon info" data-visible="section_info_logged"></button>
+
+	            <!-- LOGGED CONTACT -->
+	            <button data-section="section_contact_logged" class="icon share" data-visible="section_contact_logged"></button><!-- play -->
+	        </nav>
+	    </footer>
+
+	    <section id="section_logged_radio_ui" class="indented" data-animation="slide">
+	        <div id="ppal_radio" class="info_vista_ppal_noscrollContent">
+	            <ul class="ul_centered_sin_margenes">
+	                <h3 class="align-center subtitulo info_vista_ppal" data-l10n-id="id_article_logged_nombre_emisora_seleccionadaa" id="id_article_logged_nombre_emisora_seleccionada"></h3>
+	                <h3 class="align-center subtitulo info_vista_ppal" data-l10n-id="id_article_logged_frecuencia_emisora_seleccionadaa" id="id_article_logged_frecuencia_emisora_seleccionada"></h3>
+	            </ul>
+
+	            <ul class="ul_centered_sin_margen_sup">
+	                <button class="normal blue icon chart-bar botones_punt_fav" id="btn_logged_btn_puntuaciones"></button>
+	                <button class="normal blue icon star-empty botones_punt_fav" id="btn_logged_btn_favoritos"></button>
+	                <button class="normal blue icon pause botones_punt_fav hidden" id="btn_logged_btn_pause"></button><!-- versWEB -->
+	                <button class="normal blue icon play botones_punt_fav hidden" id="btn_logged_btn_play"></button><!-- versWEB -->
+
+	                <!--<button class="icon hammer red btn_fijo_superior_izq" id="id_btn_incidencia_logged" data-device="tablet"></button>-->
+	                <p><span id="txtBD_aniadir_puntuacion"></span></p>
+	                <p><span id="txtBD_aniadir_favorito" hidden></span></p>
+	                <p><span id="txtBD_quitar_favorito" hidden></span></p>
+	            </ul>
+	        </div>
+	        
+	        <div id="ppal_listado_emisiones" class="info_vista_ppal_scrollContent">
+	            <!--<ul id="txtBD_radio_ui_logged"></ul>-->
+	            <ul id="txtBD_radio_ui_logged_json"></ul>
+	        </div>
+	    </section>
+	    
+	    <section id="section_logged_aniadir_emision" class="indented" data-animation="slide">
+	        <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_aniadir_emision_titulo"></h1>-->
+	        <!--<button class="icon info-circled blue btn_fijo_superior_drch" id="id_btn_logged_add_broadcast_info"></button>-->
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_article_logged_aniadir_emision_elige_emisora">Nombre emisora de esta emisión</li><!-- id_article_logged_aniadir_emision_title_aniadir-->
+	            <li>
+	                <div id="txtBD_ddl_emisiones_nombre"></div>
+	            </li>
+	        </ul>
+	        <button class="smallest orange_dark btn_centered" data-section="section_logged_aniadir_emisora_nueva" data-l10n-id="id_article_logged_aniadir_emision_btn_aniadir_emisora" id="id_article_logged_aniadir_emision_btn_aniadir_emisora">Añadir nombre emisora</button>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_article_logged_aniadir_emision_escribe_frecuencia">Introduce la frecuencia</li>
+	            <li>
+	                <input type="number" id="id_article_logged_aniadir_emision_frecuencia" required></input>
+	                <p class="subtitulo_mini_derecha" data-l10n-id="id_subtitulo_recomendacion_frecuencia">*entre 87.0 y 108.0</p>
+	            </li>
+	        </ul>
+	        <button class="wide" data-l10n-id="id_article_logged_aniadir_emision_btn_aniadir_emision" id="id_article_logged_aniadir_emision_btn_aniadir_emision"></button>
+	        <p><span id="txtBD_aniadir_emision"></span></p>
+	    </section>
+
+	    <section id="section_logged_aniadir_emisora_nueva" class="indented" data-animation="slide">
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_article_logged_aniadir_emisora_nueva_nombre_emisora">Nombre Emisora</li>
+	            <li><input type="text" id="id_article_logged_aniadir_emisora_nueva_nombre" maxlength="30" required/></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_article_logged_aniadir_emisora_nueva_elegir_alcance">Introduce su alcance</li>
+	            <li>
+	                <div id="txtBD_ddl_emisoras_alcance"></div>
+	            </li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_article_logged_aniadir_emisora_nueva_elegir_tipo">Elige tipo(s) de emisora</li>
+	            <li>
+	                <div id="txtBD_ddl_emisoras_tipos"></div>
+	            </li>
+	        </ul>
+	        <button class="wide" data-l10n-id="id_article_logged_aniadir_emisora_nueva_btn_aniadir_emisora" id="id_article_logged_aniadir_emisora_btn"></button>
+	        <p><span id="txtBD_aniadir_emisora_nueva"></span></p>
+	        <p><span id="txtBD_aniadir_emisora_nueva_tipos"></span></p>
+	    </section>
+	    
+	    <section id="section_logged_rds" class="indented" data-animation="slide">
+	        <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_rds_titulo"></h1>-->
+	        <ul class="ul_centered_sin_margenes">
+	            <!--<form class="rds_form">
+	                <!- -<div class="clear"></div>
+	                <label id="mucha_prec_label" value="Mucha precisión" data-l10n-id="id_mucha_prec" class="ul_centered"/>
+	                <input type="radio" id="mucha_prec" class="circle" name="prec" value="mucha_prec" data-l10n-id="id_mucha_prec"></input>- ->
+	                <div class="clear"></div>
+	                <div>
+		                <label id="normal_prec_label" value="Precisión Normal" data-l10n-id="id_normal_prec" class="ul_centered"></label>
+		                <input type="radio" id="normal_prec" class="circle ul_centered" name="prec" value="normal_prec" data-l10n-id="id_normal_prec" checked="checked"></input>
+	                </div>
+	                <div>
+		                <div class="clear"></div>
+		                <label id="poca_prec_label" value="Poca precisión" data-l10n-id="id_poca_prec" class="ul_centered"></label>
+		                <input type="radio" id="poca_prec" class="circle ul_centered" name="prec" value="poca_prec" data-l10n-id="id_poca_prec"></input>
+		            </div>
+	                <div class="clear"></div>
+	            </form>-->
+	            <!--<button class="icon info-circled blue btn_fijo_superior_drch" id="id_btn_logged_rds_info"></button>-->
+	            
+	            <button class="btn_rds_prec orange_dark" data-l10n-id="id_normal_prec" id="normal_prec"></button>
+	            <button class="btn_rds_prec orange_dark" data-l10n-id="id_poca_prec" id="poca_prec"></button>
+
+	        </ul>
+	        <ul id="txtBD_rds_logged"></ul>
+	        <ul id="txtBD_rds_logged_json"></ul>
+	    </section>
+
+	    <section id="section_logged_escanear_emisoras" class="indented" data-animation="slide">
+			<ul>
+				<li class="separator oculto" style="color:black;" data-l10n-id="id_article_logged_scan_emision_nueva_frecuencia" id="id_scan_emision_nueva_titulo_frecuencia">Nueva emisión</li>
+				<div class="texto_freq" id="txtBD_scan_nueva_frecuencia"></div>
+				<div class="texto_freq" id="txtBD_usuario_logged_scan_emisiones_parecidas"></div>
+            </ul>
+			<div id="scan_emisora_nueva_borde" class="borde_simple oculto">
+				<ul class="ul_centered_sin_margenes">
+					<li class="separator oculto" style="color:black; margin-bottom:5px;text-align: left;" data-l10n-id="id_btn_logged_scan_save" id="id_scan_emision_nueva_aniadirla">Añadir emisión</li>
+					<div id="txtBD_ddl_emisiones_nombre_scan"></div>
+					<button class="smallest orange_dark btn_leftered" data-section="section_logged_scan_aniadir_emisora" data-l10n-id="id_article_logged_aniadir_emision_btn_aniadir_emisora" id="btn_logged_scan_aniadir_emisora">Añadir nombre emisora</button><br/>
+					<button class="normal theme menos_margen" data-l10n-id="id_btn_logged_scan_save" id="btn_logged_scan_save" style="display:none">Añadir</button>
+				</ul>
+			</div>
+			<br/>
+			<!--<div id="scan_emisora_coincidente_borde" class="borde_simple oculto">
+	            <ul>
+	            	<li class="separator oculto" style="color:black;" data-l10n-id="id_article_logged_scan_emision_nueva_encontradas" id="id_scan_emision_nueva_titulo_encontradas">Emisiones encontradas coincidentes</li>
+					<div class="texto_freq" id="txtBD_usuario_logged_scan_emisiones_parecidas"></div>
+	            </ul>
+	        </div>-->
+			<ul class="ul_centered_sin_margenes">
+		        <button class="biggest align-center blue botones_punt_fav" data-l10n-id="id_btn_logged_btn_scan_inicializar" id="btn_logged_btn_scan_inicializar">Iniciar</button><br/>
+		        <button class="biggest align-center blue botones_punt_fav" data-l10n-id="id_btn_logged_btn_scan" id="btn_logged_btn_scan" style="display:none">Buscar</button><br/>
+        	</ul>
+			<p><span id="txtBD_aniadir_emision_scan"></span></p>
+	    </section>
+
+		<section id="section_logged_scan_aniadir_emisora" class="indented" data-animation="slide">
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_article_logged_aniadir_emisora_nueva_nombre_emisora">Nombre Emisora</li>
+	            <li><input type="text" id="id_article_logged_scan_aniadir_emisora_nombre" maxlength="30" required/></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_article_logged_aniadir_emisora_nueva_elegir_alcance">Introduce su alcance</li>
+	            <li>
+	                <div id="txtBD_ddl_emisoras_alcance_scan"></div>
+	            </li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_article_logged_aniadir_emisora_nueva_elegir_tipo">Elige tipo(s) de emisora</li>
+	            <li>
+	                <div id="txtBD_ddl_emisoras_tipos_scan"></div>
+	            </li>
+	        </ul>
+	        <button class="wide" data-l10n-id="id_article_logged_aniadir_emisora_nueva_btn_aniadir_emisora" id="id_article_logged_scan_aniadir_emisora_btn"></button>
+	        <p><span id="txtBD_aniadir_emisora_nueva_scan"></span></p>
+	        <p><span id="txtBD_aniadir_emisora_nueva_tipos_scan"></span></p>
+	    </section>
+
+
+	    <!-- INFO EMISORA -->    
+	    <section id="section_logged_info_emisora" class="indented" data-animation="slide">
+	        <!--<ul id="txtBD_info_emisora_logged"></ul>-->
+	        
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_info_emisora_nombre" id="id_info_emisora_nombre">Nombre emisora</li>
+	            <li id="txtBD_info_emisora_logged_nombre"></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_info_emisora_tipo">Tipo emisora</li>
+	            <li id="txtBD_info_emisora_logged_tipo"></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_info_emisora_alcance">Alcance emisora</li>
+	            <li id="txtBD_info_emisora_logged_alcance"></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_info_emisora_fecha_agrego">Cuando se agregoó</li>
+	            <li id="txtBD_info_emisora_logged_fecha_agrego"></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_info_emisora_sus_emisiones">Sus emisiones</li>
+	            <li id="txtBD_info_emisora_logged_sus_emisiones"></li>
+	        </ul>
+	        <ul class="ul_centered">
+	            <!--<li id="txtBD_info_emisora_logged_imagen_random"></li>-->
+	            <!--<li><img class="img_perfil" src="./stylesheets/mine/icono_radio/2.svg" alt=""></li>-->
+	        </ul>
+	    </section>
+
+
+	    <!-- PROFILE -->
+	    <section id="section_logged_profile" class="indented" data-animation="slide">
+	        <ul id="txtBD_usuario_logged_profile_datos"></ul>
+	        <!--<ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_foto">Foto</li>
+	            <li><input type="file" accept="image/*" multiple id="input_foto"></li>
+	        </ul>-->
+
+			<div class='container' hidden>
+		        <p>
+		            Select File: 
+		            <input type='file' id='_file'> 
+		            <input type='button' id='_submit' value='Upload!'>
+		        </p>
+		        <div class='progress_outer'>
+		            <div id='_progress' class='progress'></div>
+		        </div>
+		    </div>
+
+
+	    </section>
+
+	    <section id="section_logged_profile_listado_favoritos" class="indented" data-animation="slide">
+	        <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_profile_listado_favoritos_titulo">Sección Listado Favoritos</h1>-->
+	        <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_profile_listado_favoritos_text1">Sección Listado Favoritos</h1>-->
+	        <ul id="txtBD_usuario_logged_profile_listado_favoritos_propios"></ul>
+	    </section>
+	    
+	    <section id="section_logged_profile_listado_puntuados" class="indented" data-animation="slide">
+	        <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_profile_listado_puntuados_titulo">Sección Listado Puntuados</h1>-->
+	        <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_profile_listado_puntuados_text1">Sección Listado Puntuados</h1>-->
+	        <ul id="txtBD_usuario_logged_profile_listado_puntuados_propios"></ul>
+	    </section>
+
+	    <section id="section_logged_profile_listado_aniadidos" class="indented" data-animation="slide">
+	        <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_profile_listado_aniadidos_titulo">Sección Listado Añadidos</h1>-->
+	        <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_profile_listado_aniadidos_text1">Sección Listado Añadidos</h1>-->
+	        <ul id="txtBD_usuario_logged_profile_listado_aniadidos_emisoras_propios"></ul>
+	        <ul id="txtBD_usuario_logged_profile_listado_aniadidos_emisiones_propios"></ul>
+	    </section>
+
+
+		<!-- POSITION -->
+	    <section id="section_logged_position" class="indented" data-animation="slide">
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_gps_info_coordenadas">Coordenadas GPS</li>
+            	<li>
+		        	<div class="horizontal grid">
+		                <div class="box_9">
+	                		<input type="text" id="id_article_logged_profile_coordenadas" class="line" disabled="">
+		                </div>
+		                <div class="">
+	        				<button class="blue icon location big" id="id_article_logged_profile_btn_reload_position" style="padding: 10px; margin-left: 20px; margin-top: -5px; margin-bottom: 0px; margin-right: -15px;"></button>
+		                </div>
+		            </div>
+            	</li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_gps_info_zona">Posición</li>
+	            <li>
+	                <input type="text" id="id_article_logged_profile_posicion" class="line" disabled="">
+	            </li>
+	        </ul>
+	        
+	        <button class="red icon location big hidden" id="id_article_logged_profile_btn_position_malaga" style="padding: 10px; margin-left: 20px; margin-top: -5px; margin-bottom: 0px; margin-right: -15px;">Málaga</button>
+
+	        <button class="red icon location big hidden" id="id_article_logged_profile_btn_position_torrevieja" style="padding: 10px; margin-left: 20px; margin-top: -5px; margin-bottom: 0px; margin-right: -15px;">Torrevieja</button>
+
+			<div id="map"></div>
+
+	    </section>
+
+		<!-- SETTINGS -->
+	    <section id="section_logged_settings" class="indented" data-animation="slide">
+	        <ul>
+	        	<li>
+					<label for="id_autords">AUTORDS</label>
+		        	<input type="checkbox" id="id_autords" class="square">
+	        	</li>
+	        </ul>
+
+	        
+
+			<!--
+		        <button class="red icon location big" id="id_article_logged_profile_btn_position_burgos" style="padding: 10px; margin-left: 20px; margin-top: -5px; margin-bottom: 0px; margin-right: -15px;">Burgos</button>
+		        <button class="red icon location big" id="id_article_logged_profile_btn_position_donosti" style="padding: 10px; margin-left: 20px; margin-top: -5px; margin-bottom: 0px; margin-right: -15px;">Donosti</button>
+
+		        <h1 class="align-center" data-l10n-id="id_gps_latitud_info" id="id_gps_latitud_info" hidden></h1>     
+		        <h1 class="align-center" data-l10n-id="id_gps_longitud_info" id="id_gps_longitud_info" hidden></h1>
+		               
+		        <h3 class="align-center" id="id_article_logged_posicion_gps_info_posiciones" hidden></h3>
+		        	<!- - style="font-weight: 300;" - ->
+		        
+		        <h3 class="align-center" style="font-weight: 300;" data-l10n-id="id_article_notlogged_posicion_gps_info_ciudad" id="id_article_notlogged_posicion_gps_info_ciudad" hidden></h3>
+		        
+		        <h3 class="align-center" style="font-weight: 300;" data-l10n-id="id_gps_info_ciudad2" id="id_article_notlogged_posicion_gps_info_ciudad2" hidden></h3>
+	        -->
+
+	        <ul class="ul_centered">
+	            <!--<button class="blue" data-article="article_logged_profile_cambiar_pass" data-l10n-id="id_cambiar_password">Cambiar Password</button><br/>-->
+	            <button class="blue" data-section="section_logged_profile_cambiar_pass" data-l10n-id="id_cambiar_password">Cambiar Password</button><br/>
+	            <button class="small blue" data-l10n-id="id_article_logged_cerrar_sesion" id="btn_logged_profile_close_session">Cerrar Sesion</button>
+	            <!--<button class="small blue" data-l10n-id="id_article_logged_eliminar_cuenta" data-article="article_logged_profile_eliminar_usuario">Eliminar Cuenta</button>-->
+	            <button class="small blue" data-l10n-id="id_article_logged_eliminar_cuenta" data-section="section_logged_profile_eliminar_usuario">Eliminar Cuenta</button>
+	        </ul>
+	    </section>
+
+	    <section id="section_logged_profile_cambiar_pass" class="indented" data-animation="slide">
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_email">Email</li>
+	            <li><input type="email" id="id_article_logged_profile_cambiar_pass_email" class="line"></input></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_password_actual">Password Actual</li>
+	            <li><input type="password" id="id_article_logged_profile_cambiar_pass_pass_actual" class="line"></input></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_password_nueva">Password Nueva</li>
+	            <li><input type="password" id="id_article_logged_profile_cambiar_pass_pass_nueva" class="line"></input></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_password_nueva_repetir">Repetir Password Nueva</li>
+	            <li><input type="password" id="id_article_logged_profile_cambiar_pass_pass_nueva_rep" class="line"></input></li>
+	        </ul>
+	        <ul>
+	            <button class="wide" data-l10n-id="id_guardar_cambios" id="id_article_logged_profile_cambiar_pass_btn_guardar_cambios">Guardar Cambios</button>
+	        </ul>
+	        <p><span id="txtBD_cambiar_pass"></span></p>
+	    </section>
+
+	    <section id="section_logged_profile_eliminar_usuario" class="indented" data-animation="slide">
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_email">Email</li>
+	            <li><input type="email" id="id_article_logged_profile_eliminar_usuario_email" class="line"></input></li>
+	        </ul>
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_password">Password</li>
+	            <li><input type="password" id="id_article_logged_profile_eliminar_usuario_pass" class="line"></input></li>
+	        </ul>
+	        <ul>
+	            <button class="wide" data-l10n-id="id_eliminar" id="id_article_logged_profile_eliminar_usuario_btn_eliminar">Eliminar</button>
+	        </ul>
+	        <p><span id="txtBD_delete_usuario"></span></p>
+	        <p><span id="txtBD_logged_profile_eliminar_usuario_text1"></span></p>
+	    </section>
+
+
+		<!-- COMMENTS -->
+	    <section id="section_logged_profile_listado_comentarios" class="indented" data-animation="slide">
+	        <div class="color_fondo_app">
+	        <ul>
+	            <li class="separator" style="color:black;" data-l10n-id="id_article_logged_profile_listado_comentario_usuario_titulo">Redactar comentario sobre la app</li>
+	            <li>
+	                <textarea id="id_article_logged_profile_listado_comentario_usuario_textarea" data-l10n-id="id_article_logged_profile_listado_comentario_usuario_textarea_vacia" maxlength="160"></textarea>
+	                <!-- placeholder="Escribe que te parece la app, que mejorarías y que no... Tu opinión nos interesa!!" data-l10n-id="id_article_logged_profile_listado_comentario_usuario_textarea" -->
+	                <p class="subtitulo_mini_derecha" data-l10n-id="id_article_logged_profile_listado_comentario_usuario_informacion_publica">*este comentario puede aparecer de modo público para el resto de usuarios</p>
+	            </li>
+	        </ul>
+	        <ul>
+	            <button class="wide" data-l10n-id="id_article_logged_profile_listado_comentario_btn_guardar_comentario" id="id_article_logged_profile_btn_guardar_comentario">Guardar comentario</button>
+	            <p><span id="txtBD_aniadir_comentario" hidden></span></p>
+	        </ul>
+	            <h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_profile_listado_comentarios_subtitulo2"> Listado Comentarios del usuario</h1>
+	            <!--<h1 class="align-center info_vista_subtitulos_sections" data-l10n-id="id_article_logged_profile_listado_comentarios_subtitulo">Sección Listado Comentarios del usuario</h1>-->
+	            <ul id="txtBD_usuario_logged_profile_listado_comentarios_propios"></ul>
+	            <!--<ul class="ul_centered">
+	                <button class="wide_index black" data-section="section_logged_comments" data-l10n-id="id_btn_comments" id="id_btn_comments_logged">Ver Comentarios</button>
+	            </ul>-->
+	        </div>
+	    </section>
+
+	    <section id="section_logged_comments" class="indented" data-animation="cover">
+	        <!--<h1 class="align-center" data-l10n-id="id_comments_title">Sección Comentarios</h1>-->
+	        <ul id="txtBD_logged_comentarios"></ul>
+	    </section>
+		
+
+		<!-- LOGGED INFO APP -->
+	    <section id="section_info_logged" class="indented" data-animation="slide">
+	        <ul>
+	            <h1 class="align-center" data-l10n-id="id_fmradiords">FM Radio RDS</h1>
+	            <p class="align-justify" data-l10n-id="id_article_info_text1">Esta aplicación web es el resultado de un proyecto final para el Grado de Informática de Gestión y Sistemas de la Información. </p>
+	            <p class="align-justify" data-l10n-id="id_article_info_text2">Consiste en un gestor de radio FM avanzado. Gracias a la geolocalización del dispositivo y al sensor de radio FM integrado, ofrecerá a los usuarios la opción de seleccionar la emisora que desea escuchar sin depender de su frecuencia, manteniendo la emisora que esté escuchando según su geoposición.</p>
+	            <p class="align-justify" data-l10n-id="id_article_info_text3">Se trata de una aplicación para el sistema operativo de Mozilla Firefox OS, disponible para el resto de plataformas con sus funciones limitadas.</p>
+	            
+	        </ul>
+	        
+	        <!-- Colaboradores -->
+	        <ul>
+	            <li>
+	                <h3 class="align-center" data-l10n-id="id_colaboradores">Colaboradores</h3>
+	            </li>
+	        </ul>
+	        <!-- Open Street Map-->
+	        <ul>
+	            <li class="map datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_openstreetmap">OpenStreetMap </p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="view_url_openstreetview_firefoxos" data-os="firefoxos" data-l10n-id="id_colaboradores_web">Visitar web</p>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-os="android" data-l10n-id="id_colaboradores_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-browser="firefox" data-l10n-id="id_colaboradores_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-browser="chrome" data-l10n-id="id_colaboradores_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-browser="safari" data-l10n-id="id_colaboradores_web ">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://www.openstreetmap.org/" data-browser="ie" data-l10n-id="id_colaboradores_web">Visitar web</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- Mozilla Developer Network-->
+	        <ul>
+	            <li class="html5 datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_mdn">Mozilla Developen Networks</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="view_url_mdn_firefoxos" data-os="firefoxos" data-l10n-id="id_mdn_web">Visitar web</p>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-os="android" data-l10n-id="id_mdn_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-browser="firefox" data-l10n-id="id_mdn_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-browser="chrome" data-l10n-id="id_mdn_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-browser="safari" data-l10n-id="id_mdn_web">Visitar web</a>
+	                        <a class="align-center black" target="_blank" href="https://developer.mozilla.org/es/" data-browser="ie" data-l10n-id="id_mdn_web">Visitar web</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+			<!-- TakoJS-->
+	        <ul>
+	        	<!--<li class="compass datos_contacto_rrss">-->
+	            <li class="datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_takojs">TakoJS</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+                        	<p class="align-center elem_info_sin_margenes" id="view_url_takojs_firefoxos" data-os="firefoxos" data-l10n-id="id_takojs_web">Visitar web	
+		                		<button class="white elem_info_sin_margenes elem_info_sin_margenes_btn">
+		                			<img src="./stylesheets/mine/icons/tako-logo.png" alt="">
+		                		</button>
+	                		</p>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-os="android" data-l10n-id="id_takojs_web">Visitar web
+	                        	<button class="white elem_info_sin_margenes elem_info_sin_margenes_btn">
+		                			<img src="./stylesheets/mine/icons/tako-logo.png" alt="">
+		                		</button>
+	                        </a>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-browser="firefox" data-l10n-id="id_takojs_web">Visitar web
+	                        	<button class="white elem_info_sin_margenes elem_info_sin_margenes_btn">
+		                			<img src="./stylesheets/mine/icons/tako-logo.png" alt="">
+		                		</button>
+	                        </a>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-browser="chrome" data-l10n-id="id_takojs_web">Visitar web
+	                        <button class="white elem_info_sin_margenes elem_info_sin_margenes_btn">
+	                			<img src="./stylesheets/mine/icons/tako-logo.png" alt="">
+	                		</button>
+	                        </a>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-browser="safari" data-l10n-id="id_takojs_web">Visitar web
+	                        <button class="white elem_info_sin_margenes elem_info_sin_margenes_btn">
+	                			<img src="./stylesheets/mine/icons/tako-logo.png" alt="">
+	                		</button>
+	                        </a>
+	                        <a class="align-center black" target="_blank" href="http://www.takojs.com" data-browser="ie" data-l10n-id="id_takojs_web">Visitar web
+		                        <button class="white elem_info_sin_margenes elem_info_sin_margenes_btn">
+		                			<img src="./stylesheets/mine/icons/tako-logo.png" alt="">
+		                		</button>
+	                        </a>
+	                    </div>
+                		<!--<img src="./stylesheets/mine/icons/tako-logo.png" alt="">-->
+	                    
+	                </div>
+	            </li>
+	        </ul>
+	    </section>
+
+		<!-- LOGGED CONTACT -->
+	    <section id="section_contact_logged" class="indented" data-animation="slide">
+	        <!-- Aplicación -->
+ 
+	        <ul>
+	            <li>
+	                <h3 class="align-center datos_contacto_rrss_titulos" data-l10n-id="id_article_info_text5">Aplicación: FM Radio RDS App</h3>
+	            </li>
+	        </ul>
+	        
+	        <!-- Twitter FMRadioRDS -->
+	        <ul>
+	            <li class="twitter datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_twitter">Twitter</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <!-- Para FxOS Versión app, la de abajo es versión web ¿? <a class="align-center" target="_blank" href="https://twitter.com/fmradiords" data-os="firefoxos" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>-->
+	                        <p class="align-center" id="view_url_twitter_profile_fmradiords_firefoxos" data-os="firefoxos" data-l10n-id="id_fmradiords_twitter"> @fmradiords</p>
+	                        <a class="align-center black" href="https://twitter.com/fmradiords" data-os="android" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/fmradiords" data-browser="firefox" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/fmradiords" data-browser="chrome" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/fmradiords" data-browser="safari" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/fmradiords" data-browser="ie" data-l10n-id="id_fmradiords_twitter">@fmradiords</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- GooglePlus FMRadioRDS -->
+	        <ul>
+	            <li class="googleplus datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column ">
+	                        <p class="align-center" data-l10n-id="id_googleplus">Google+ </p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="view_url_googleplus_profile_fmradiords_firefoxos" data-os="firefoxos" data-l10n-id="id_fmradiords_googleplus">+fmradiords</p>
+	                        <a class="align-center black" href="https://plus.google.com/u/0/117003371651579243396/posts" data-os="android" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/u/0/117003371651579243396/posts" data-browser="firefox" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/u/0/117003371651579243396/posts" data-browser="chrome" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/u/0/117003371651579243396/posts" data-browser="safari" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/u/0/117003371651579243396/posts" data-browser="ie" data-l10n-id="id_fmradiords_googleplus">+fmradiords</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- Email to FMRadioRDS -->
+	        <ul>
+	            <li class="email datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column ">
+	                        <p class="align-center" data-l10n-id="id_email">Email</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="write_email_fmradiords_firefoxos" data-os="firefoxos" data-l10n-id="id_fmradiords_email">fmradiords</p>
+	                        <address class="align-center" data-os="android" ><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com">fmradiords</a></address>
+	                        <address class="align-center" data-browser="firefox"><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com"></a></address>
+	                        <address class="align-center" data-browser="chrome" ><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com">fmradiords</a></address>
+	                        <address class="align-center" data-browser="safari" ><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com">fmradiords</a></address>
+	                        <address class="align-center" data-browser="ie" ><a class="black" data-l10n-id="id_fmradiords_email" href="mailto:fmradiordsapp@gmail.com">fmradiords</a></address>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        
+	        <br>
+	        <br>
+
+	        <!-- Desarrollador -->
+	        <ul>
+	            <li>
+	                <h3 class="align-center datos_contacto_rrss_titulos" data-l10n-id="id_article_info_text6">Desarrollador: Imanol Gonbar</h3>
+	            </li>
+	        </ul>
+	        <!-- Twitter imagonbar -->
+	        <ul>
+	            <li class="twitter datos_contacto_rrss">
+	                <div class="line align-center ">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_twitter">Twitter </p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center " id="view_url_twitter_profile_imagonbar_firefoxos" data-os="firefoxos" data-l10n-id="id_imagonbar_twitter"> @imagonbar</p>
+	                        <a class="align-center black" href="https://twitter.com/imagonbar" data-os="android" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/imagonbar" data-browser="firefox" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/imagonbar" data-browser="chrome" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/imagonbar" data-browser="safari" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://twitter.com/imagonbar" data-browser="ie" data-l10n-id="id_imagonbar_twitter">@imagonbar</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- GooglePlus imagonbar -->
+	        <ul>
+	            <li class="googleplus datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column">
+	                        <p class="align-center" data-l10n-id="id_googleplus">Google+ </p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="view_url_googleplus_profile_imagonbar_firefoxos" data-os="firefoxos" data-l10n-id="id_imagonbar_googleplus">+imagonbar</p>
+	                        <a class="align-center black" href="https://plus.google.com/+ImanolGonBar" data-os="android" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/+ImanolGonBar" data-browser="firefox" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/+ImanolGonBar" data-browser="chrome" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/+ImanolGonBar" data-browser="safari" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                        <a class="align-center black" target="_blank" href="https://plus.google.com/+ImanolGonBar" data-browser="ie" data-l10n-id="id_imagonbar_googleplus">+imagonbar</a>
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	        <!-- Email to imagonbar -->
+	        <ul>
+	            <li class="email datos_contacto_rrss">
+	                <div class="line align-center">
+	                    <div class="five_column ">
+	                        <p class="align-center" data-l10n-id="id_email">Email</p>
+	                    </div>
+	                    <div class="five_column datos_contacto_rrss">
+	                        <p class="align-center" id="write_email_imagonbar_firefoxos" data-os="firefoxos" data-l10n-id="id_imagonbar_email">imagonbar</p>
+	                        <address class="align-center" data-os="android" ><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+	                        <address class="align-center" data-browser="firefox"><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+	                        <address class="align-center" data-browser="chrome" ><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+	                        <address class="align-center" data-browser="safari"><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+	                        <address class="align-center" data-browser="ie"><a class="black" data-l10n-id="id_imagonbar_email" href="mailto:imagonbar88@gmail.com">imagonbar</a></address>
+
+	                    </div>
+	                </div>
+	            </li>
+	        </ul>
+	    </section>
+	</article>
+
+	
+    <div id="antenna-warning" class="warning" hidden="">
+      <div></div>
+      <div id="antenna-warning-header" class="warning-header" data-l10n-id="noAntenna">Plug in a headset</div>
+      <div id="antenna-warning-body" class="warning-body" data-l10n-id="noAntennaMsg">FM Radio requires a plugged in headset to receive radio signals.</div>
+    </div>
+
+	<script type="text/javascript" src="./js/tako.components.js"></script>
+	<script type="text/javascript" src="./js/tako.debug.js"></script>
+	<script type="text/javascript" src="./js/tako.index.js"></script>
+	<script type="text/javascript" src="./js/tako.js"></script>
+
+	<script type="text/javascript" src="./js/libs/l10n.js"></script>
+	
+	<script type="text/javascript" src="./js/libs/my_fm.js"></script>
+
+	<script type="text/javascript" src="./js/jquery/jquery-1.11.1.js"></script>
+
+	<script type="text/javascript" src="./js/leaflet_maps/leaflet.js"></script>
+
+    <script type="text/javascript" src='./js/upload.js'></script>
+	<!--<script type="text/javascript" src="./js/my_map.js"></script>-->
+</body>
+</html>
